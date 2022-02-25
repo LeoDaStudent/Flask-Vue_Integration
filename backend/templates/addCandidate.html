@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	<form>
+	  <div class="form-group">
+	    <label for="InputCandidatesName">Name</label>
+	    <input type="text" class="form-control" id="InputCandidatesName" aria-describedby="emailHelp" placeholder="Enter Name">
+	  </div>
+	  <div class="form-group">
+	    <label for="InputPoints">Points</label>
+	    <input type="numerical" class="form-control" id="InputPoints" placeholder="# of Points">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+{% endblock %}
