@@ -41,7 +41,7 @@ def manageCandidates():
 
         person = Candidate.query.filter_by(id=post_data.get('id')).first()
 
-        if person is None:
+        if person is None: # bug needs to handle when the front end sends null
             person = Candidate(id=post_data.get('id'), name=post_data.get('name'), poiints=post_data.get('points'))
             db.session.add(person)
             db.session.commit()
