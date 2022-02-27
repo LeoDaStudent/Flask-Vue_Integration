@@ -1,15 +1,21 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Candidate from "../components/Candidate.vue";
+import Vue from "vue";
+import VueRouter from "vue-router";
+import CandidatesView from "../components/candidatesView";
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/candidates",
-      name: "Candidates",
-      component: Candidate
-    }
-  ],
+Vue.use(VueRouter);
+
+const routes = [
+  {
+    path: "/candidates",
+    name: "candidates",
+    component: CandidatesView,
+  },
+];
+
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
 });
 
 export default router;
