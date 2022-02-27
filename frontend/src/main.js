@@ -8,10 +8,11 @@ import BootstrapVue from "bootstrap-vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 /* import specific icons */
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faDumpster } from "@fortawesome/free-solid-svg-icons";
 /* import font awesome icon component */
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 /* add icons to the library */
-library.add(faArrowUp);
+library.add(faArrowUp, faDumpster);
 /* add font awesome icon component */
 Vue.component("font-a", FontAwesomeIcon);
 
