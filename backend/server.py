@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, request, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.expression import update
 from flask_cors import CORS
 from datetime import datetime
 import os
@@ -41,7 +42,8 @@ def manageCandidates():
 
         person = Candidate.query.filter_by(id=post_data.get('id')).first()
 
-        if person is None: # bug needs to handle when the front end sends null
+        if person is None:
+            # bug needs to handle when the front end sends null
             person = Candidate(id=post_data.get('id'), name=post_data.get('name'), poiints=post_data.get('points'))
             db.session.add(person)
             db.session.commit()
@@ -69,6 +71,24 @@ def manageCandidates():
 @app.route("/add")
 def addCandidate():
     return render_template("addCandidate.html")
+
+@app.route("/candidates/<candidate_id>", methods=['PUT', 'DELETE'])
+def manage_single_candidate(candidate_id):
+    candidate_id = int(candidate_id)
+    person = Candidate.query.filter_by(id=candidate_id).first()
+    if person is None:  # if id not in database return failed
+        return jsonify({'status': 'FAILED!', 'message': "couldn't find user"})
+    # ELSE
+
+    if request.method == "PUT": # update points
+        person.poiints += 1
+        db.session.commit()
+        return jsonify({'status': 'idek thb'})
+    elif request.method == "DELETE":
+        db.session.delete(person)
+        db.session.commit()
+        return jsonify({'status': 'idek thb'})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
